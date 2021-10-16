@@ -1,0 +1,24 @@
+## Use the official Ubuntu 18.04 Image from Dockerhub
+FROM docker.io/library/ubuntu:18.04
+
+## Set up environment variables so the tzdata install doesn't
+## hang on asking for user input for configuration
+ARG DEBIAN_FRONTEND="noninteractive"
+ARG TZ="America/New_York"
+
+RUN apt-get update &&\
+    apt-get install -y --no-install-recommends ca-certificates\
+      qtbase5-dev qtbase5-private-dev git cmake make gcc g++ pkg-config\
+      libavcodec-dev libavformat-dev libavutil-dev libswscale-dev libxi-dev\
+      libxrandr-dev libudev-dev libevdev-dev libsfml-dev libminiupnpc-dev\
+      libmbedtls-dev libcurl4-openssl-dev libhidapi-dev libsystemd-dev\
+      libbluetooth-dev libasound2-dev libpulse-dev libpugixml-dev libbz2-dev\
+      libzstd-dev liblzo2-dev libpng-dev libusb-1.0-0-dev gettext\
+      file dpkg-dev &&\
+    apt-get clean &&\
+    mkdir /root/dolphin
+
+## Copy in the build script to make things easy
+COPY build_dolphin.sh /root/dolphin/build_dolphin.sh
+
+WORKDIR /root/dolphin
