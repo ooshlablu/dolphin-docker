@@ -59,19 +59,10 @@ case ${ID} in
     PACKAGE_TYPE='DEB';;
 esac
 
-
-EXTRA_CMAKE_OPTIONS='-DCPACK_PACKAGE_CONTACT=build_script'
-## Do a bunch of hacky stuff to enable deb package generation until
-## https://github.com/dolphin-emu/dolphin/pull/10170 is merged
-if [ $(grep -c CPACK_DEBIAN_PACKAGE_SHLIBDEPS CMakeLists.txt) -eq 0 ] && [ "${PACKAGE_TYPE}" == "DEB" ] && [ ${GENERATE_PACKAGES} ]; then
-  ## Add the cpack vars needed to generate deb packages as extra options
-  EXTRA_CMAKE_OPTIONS='-DCPACK_PACKAGE_CONTACT=build_script -DCPACK_DEBIAN_PACKAGE_SHLIBDEPS=ON -DCPACK_DEBIAN_PACKAGE_SECTION=Games'
-fi
-
 ## Build it
 mkdir build
 cd build
-cmake ${EXTRA_CMAKE_OPTIONS} ..
+cmake -DCPACK_PACKAGE_CONTACT="ooshlablu's build script" ..
 CPU_CORES=$(nproc --all)
 make -j${CPU_CORES}
 if [ ${GENERATE_PACKAGES} ]; then
