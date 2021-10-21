@@ -7,6 +7,8 @@ GIT_REPOSITORY='https://github.com/dolphin-emu/dolphin.git'
 
 ## Function to print the help message
 usage() {
+  set +x
+  echo ""
   echo "Usage: ${0}"
   echo ""
   echo "Optional Arguments:"
