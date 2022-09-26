@@ -64,7 +64,7 @@ esac
 ## Build it
 mkdir build
 cd build
-cmake -DCPACK_PACKAGE_CONTACT="ooshlablu's build script" ..
+cmake -DCPACK_PACKAGE_CONTACT="ooshlablu's build script" -DCMAKE_C_COMPILER=gcc-10 -DCMAKE_CXX_COMPILER=g++-10 ..
 CPU_CORES=$(nproc --all)
 make -j${CPU_CORES}
 if [ ${GENERATE_PACKAGES} ]; then

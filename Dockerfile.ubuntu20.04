@@ -14,7 +14,7 @@ RUN apt-get update &&\
       libmbedtls-dev libcurl4-openssl-dev libhidapi-dev libsystemd-dev\
       libbluetooth-dev libasound2-dev libpulse-dev libpugixml-dev libbz2-dev\
       libzstd-dev liblzo2-dev libpng-dev libusb-1.0-0-dev gettext\
-      file dpkg-dev &&\
+      file dpkg-dev gcc-10 g++-10 &&\
     apt-get clean &&\
     mkdir /root/dolphin
 
